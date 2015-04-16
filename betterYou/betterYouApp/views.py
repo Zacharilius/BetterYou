@@ -3,4 +3,9 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-	return HttpResponse("View is working")
+	context_dict = {'index': 'active'}
+	return render(request, 'betterYou/home.html',context_dict)
+
+def about(request):
+	context_dict = {'about': 'active'}
+	return render(request, 'betterYou/about.html', context_dict)

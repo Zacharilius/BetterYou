@@ -1,0 +1,19 @@
+{% extends "includes/food2beer_base.html" %}
+{% block content %}
+	<div class="container">
+        <div class="jumbotron">
+			<h1>Food2Beer</h1>
+			<p>Just like wine, beer can be paired with food.</p>
+			<p>Enter a food, flavor, or type of food and Food2Beer will output a beer recommendation.</p>
+			<form action="/projects/food2beer/" method="POST">
+	    		{% csrf_token %}
+	    		{{ form }}
+	    		<input type="submit" value="Get Beer"/>
+			</form>
+			{% for combo in foodBeerCombo %}
+				<p>{{ combo }} </p>
+			{% endfor %}
+
+		</div>
+	</div>
+{% endblock %}

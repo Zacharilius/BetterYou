@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    
+    {% load staticfiles %} <!-- Bootstrap core CSS -->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="Zachary Bensley">
+    <link rel="icon" href= "{% static  'images/favicon.ico' %}">
+
+    <title>{% block title %} Better-You {% endblock %}</title>
+
+    <link rel= "stylesheet" href= "{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href= "{% static 'bower_components/bootstrap/dist/css/navbar-static-top.css' %}">
+    <link rel="stylesheet" href= "{% static 'betterYou/cover.css' %}">
+
+    <style type="text/css"></style><!-- Static navbar -->
+</head>
+
+  <body>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">Better-You</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li class="active"><a href="/">Home</a></li>
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Profile</a></li>
+                  <li><a href="#">Rankings</a></li>
+                  <li><a href="#">Vote</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+  
+    {% block header %}
+    
+    {% endblock %}
+    {% block content %}
+    
+    {% endblock %}
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>©Zachary Bensley 2015</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script> 
+    <script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

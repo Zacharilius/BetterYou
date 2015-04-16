@@ -1,0 +1,12 @@
+{% extends "includes/food2beer_base.html" %}
+	{% block content %}
+	<div class="container">
+        <div class="jumbotron">
+			<h2>{{ object.name }}</h2>
+			<h3><a href = "/projects/food2beer{{ object.brewery.get_absolute_url }}">Brewery: {{ object.brewery.name }}</a></h3>
+			<h3>Type: {{ object.beerType }}</h3>
+			<h3>ABV: {{ object.abv }}</h3>
+			<h3>IBUs: {{ object.ibus }}</h3>
+		</div>
+	</div>
+	{% endblock %}
