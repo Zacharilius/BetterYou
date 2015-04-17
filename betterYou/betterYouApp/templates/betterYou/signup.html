@@ -1,0 +1,36 @@
+{% extends "includes/betterYou_base.html" %}
+{% block content %}
+    <div class="inner cover">
+        {% if registered %}
+        <h1 class="cover-heading">You have successfully registered</h1>
+            <a href="/projects/better-you/profile" class="btn btn-lg btn-default">Check out your profile</a>
+        {% else %}
+        <h1 class="cover-heading">Create an account</h1>
+        <form class="form-horizontal" role="form" method = "post" action="/projects/better-you/sign-in/">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="subject">Username: </label></br>
+                <p><font color="black">{{ user_form.username }}</font></p>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="email">Email address: </label></br>
+                <p><font color="black">{{ user_form.email }}</font></p>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="password">Password: </label></br>
+                <p><font color="black">{{ user_form.password }}</font></p>
+            </div>  
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="picture">Profile Pic: </label></br>
+                <p>{{ profile_form.picture }}</p>
+            </div> 
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-9">    
+                <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+
+{% endblock %}
