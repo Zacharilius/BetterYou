@@ -36,16 +36,26 @@
                 <ul class="nav masthead-nav">
                   <li class= '{{ nav_home }}'><a href="/projects/better-you">Home</a></li>
                   <li class= '{{ nav_about }}'><a href="/projects/better-you/about">About</a></li>
+                  {% if user.is_authenticated %}
                   <li class= '{{ nav_profile }}'><a href="/projects/better-you/profile">Profile</a></li>
                   <li class= '{{ nav_ranking }}'><a href="/projects/better-you/ranking">Rankings</a></li>
                   <li class= '{{ nav_vote }}'><a href="/projects/better-you/vote">Vote</a></li>
-                  <li class= '{{ nav_signup }}'><a href="/projects/better-you/sign-up">Sign Up</a></li>
-                  <li class= '{{ nav_login }}'><a href="/projects/better-you/log-in">Log In</a></li>
+                  <li class= '{{ nav_logout }}'>
+                    <a href="/projects/better-you/log-out">
+                      <span class="glyphicon glyphicon-log-out"></span> Log Out</a></a>
+                  </li>
+                  {% else %}
+                  <li class="{{ nav_signup }}"><a href="/projects/better-you/sign-up">
+                      <span class="glyphicon glyphicon-user"></span> Sign Up</a>
+                  </li>
+                  <li class="{{ nav_login }}"><a href="/projects/better-you/log-in">
+                    <span class="glyphicon glyphicon-log-in"></span> Log In</a>
+                  </li>
+                  {% endif %}
                 </ul>
               </nav>
             </div>
           </div>
-  
     {% block header %}
     
     {% endblock %}

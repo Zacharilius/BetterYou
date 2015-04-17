@@ -92,3 +92,5 @@ TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 TEMPLATE_DIRS = (
 	TEMPLATE_PATH,
 )
+
+LOGIN_URL = '/projects/better-you/log-in/'

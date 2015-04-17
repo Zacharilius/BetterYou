@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from betterYouApp.forms import UserForm, UserProfileForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -13,14 +13,17 @@ def about(request):
 	context_dict = {'nav_about': 'active'}
 	return render(request, 'betterYou/about.html', context_dict)
 
+@login_required
 def profile(request):
 	context_dict = {'nav_profile': 'active'}
 	return render(request, 'betterYou/profile.html', context_dict)
 
+@login_required
 def ranking(request):
 	context_dict = {'nav_ranking': 'active'}
 	return render(request, 'betterYou/ranking.html', context_dict)
 
+@login_required
 def vote(request):
 	context_dict = {'nav_vote': 'active'}
 	return render(request, 'betterYou/vote.html', context_dict)
@@ -94,7 +97,7 @@ def user_login(request):
 		if user:
 			if user.is_active:
 				login(request, user)
-				return HttpResponseRedirect('/projects/better-you')
+				return HttpResponseRedirect('/projects/better-you/')
 			else:
 				return HttpResponse("Account disabled. Contact Support")
 		else:
@@ -105,7 +108,10 @@ def user_login(request):
 
 @login_required
 def restricted(request):
-	return HttpResponse("You need to be logged in to see this page")
+    if not request.user.is_authenticated():
+        return HttpResponse("You are logged in.")
+    else:
+        return HttpResponse("You are not logged in.")
 
 @login_required
 def user_logout(request):

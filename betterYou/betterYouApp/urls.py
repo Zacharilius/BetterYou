@@ -10,5 +10,5 @@ urlpatterns = patterns('',
 	url(r'^sign-up/$', views.user_signup, name='user_signup'),
 	url(r'^log-in/$', views.user_login, name='user_login'),
 	url(r'^restricted/$', views.restricted, name='restricted'),
-	url(r'^logout/$, views.user_logout, name='logout'),
+	url(r'^log-out/$', views.user_logout, name='logout'),
 )
