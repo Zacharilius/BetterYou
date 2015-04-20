@@ -1,15 +1,19 @@
 {% extends "includes/betterYou_base.html" %}
 {% block content %}
-
     <div class="inner cover">
+
+        <h1>{{ user.username }}</h2>
+        <img src="{{ user.username.picture }}">
+        <h4>"{{ user.picture.path }}"</h4>
+
         <h1 class="cover-heading">Welcome to Better-You</h1>
         <h2 class="cover-heading">How it works</h2>
         <p class="lead">Users propose tasks for the community to complete. The community then votes on the tasks proposed by other users. The top voted tasks are selected for this week's Better-You challenges. You then earn points based on the number of challenges you compete.</p>
 		<h2 class="cover-heading">How to join</h2>
 		<p class="lead">If you're new to Better-You click Signup. If you have an account, click Log in.</p>
 		<p class="lead">
-	    	<a href="/projects/better-you/join" class="btn btn-lg btn-default">Join</a>
-	    	<a href="/projects/better-you/sign-in" class="btn btn-lg btn-default">Sign in</a>
+	    	<a href="join" class="btn btn-lg btn-default">Join</a>
+	    	<a href="Sign-In" class="btn btn-lg btn-default">Sign in</a>
     	</p>
     </div> 
 {% endblock %}

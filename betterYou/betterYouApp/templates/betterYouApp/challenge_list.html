@@ -1,0 +1,85 @@
+{% extends "includes/betterYou_base.html" %}
+{% block content %}
+
+    <div class="inner cover">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="text-align: center" class="cover-heading">Post Time</th>
+                    <th style="text-align: center" class="cover-heading">Votes</th>
+                    <th style="text-align: center" class="cover-heading">Title</th>
+                    <th style="text-align: center" class="cover-heading">Username</th>
+                    <th style="text-align: center" class="cover-heading">Quantity</th>
+                </tr
+            </thead>
+            <tbody>
+                {% for challenge  in object_list %}
+                <tr>
+                    <td class="lead">{{ challenge.postTime }}</td>
+                    <td class="lead">{{ challenge.votes }}</td>
+                    <td class="lead">{{ challenge.title }}</td>
+                    <td class="lead">{{ challenge.user }}</td>
+                    <td class="lead">
+                    <select class="form-control">                    
+                    {% if challenge.numberChallenges == 1 %}
+                            <option>1</option>
+                    {% elif challenge.numberChallenges == 2 %}
+                            <option>1</option>
+                            <option>2</option>
+                    {% elif challenge.numberChallenges == 3 %}
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>                           
+                    {% elif challenge.numberChallenges == 4 %}
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>                          
+                    {% elif challenge.numberChallenges == 5 %}
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                    {% elif challenge.numberChallenges == 6 %}
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>                          
+                    {% elif challenge.numberChallenges == 7 %}
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>                          
+                            <option>7</option>                 
+                    {% endif %}
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+   
+        </br>
+        </br>
+        <div class="container-fluid">
+            <div clas="row">
+                <div class="col-md-6">
+                    {% if page_obj.has_previous %}
+                      <a class="btn btn-lg btn-default" href="/projects/better-you/current-challenges/{{ page_obj.previous_page_number }}/" role="button"> « Previous Page</a>
+                    {% endif %}
+                </div>
+                <div class="col-md-6 text-right">
+                    {% if page_obj.has_next %}
+                      <a class="btn btn-lg btn-default" href="/projects/better-you/current-challenges/{{ page_obj.next_page_number }}/" role="button">Next Page »</a>
+                     {% endif %}       
+
+                </div>
+            </div>     
+        </div>
+    </div> 
+{% endblock %}
