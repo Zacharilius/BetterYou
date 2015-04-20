@@ -1,19 +1,85 @@
 {% extends "includes/betterYou_base.html" %}
 {% block content %}
+
     <div class="inner cover">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="text-align: center" class="cover-heading">Post Time</th>
+                    <th style="text-align: center" class="cover-heading">Votes</th>
+                    <th style="text-align: center" class="cover-heading">Title</th>
+                    <th style="text-align: center" class="cover-heading">Username</th>
+                    <th style="text-align: center" class="cover-heading">Quantity</th>
+                </tr
+            </thead>
+            <tbody>
+                {% for challenge  in object_list %}
+                <tr>
+                    <td class="lead">{{ challenge.postTime }}</td>
+                    <td class="lead">{{ challenge.votes }}</td>
+                    <td class="lead">{{ challenge.title }}</td>
+                    <td class="lead">{{ challenge.user }}</td>
+                    <td class="lead">
+                    <select class="form-control">                    
+                    {% if challenge.numberChallenges == 1 %}
+                            <option>1</option>
+                    {% elif challenge.numberChallenges == 2 %}
+                            <option>1</option>
+                            <option>2</option>
+                    {% elif challenge.numberChallenges == 3 %}
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>                           
+                    {% elif challenge.numberChallenges == 4 %}
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>                          
+                    {% elif challenge.numberChallenges == 5 %}
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                    {% elif challenge.numberChallenges == 6 %}
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>                          
+                    {% elif challenge.numberChallenges == 7 %}
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>                          
+                            <option>7</option>                 
+                    {% endif %}
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+   
+        </br>
+        </br>
+        <div class="container-fluid">
+            <div clas="row">
+                <div class="col-md-6">
+                    {% if page_obj.has_previous %}
+                      <a class="btn btn-lg btn-default" href="/projects/better-you/current-challenges/{{ page_obj.previous_page_number }}/" role="button"> « Previous Page</a>
+                    {% endif %}
+                </div>
+                <div class="col-md-6 text-right">
+                    {% if page_obj.has_next %}
+                      <a class="btn btn-lg btn-default" href="/projects/better-you/current-challenges/{{ page_obj.next_page_number }}/" role="button">Next Page »</a>
+                     {% endif %}       
 
-        <h1>{{ user.username }}</h2>
-        <img src="{{ user.username.picture }}">
-        <h4>"{{ user.picture.path }}"</h4>
-
-        <h1 class="cover-heading">Welcome to Better-You</h1>
-        <h2 class="cover-heading">How it works</h2>
-        <p class="lead">Users propose tasks for the community to complete. The community then votes on the tasks proposed by other users. The top voted tasks are selected for this week's Better-You challenges. You then earn points based on the number of challenges you compete.</p>
-		<h2 class="cover-heading">How to join</h2>
-		<p class="lead">If you're new to Better-You click Signup. If you have an account, click Log in.</p>
-		<p class="lead">
-	    	<a href="join" class="btn btn-lg btn-default">Join</a>
-	    	<a href="Sign-In" class="btn btn-lg btn-default">Sign in</a>
-    	</p>
+                </div>
+            </div>     
+        </div>
     </div> 
 {% endblock %}
