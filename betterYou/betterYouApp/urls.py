@@ -2,7 +2,7 @@ from django.conf.urls import patterns, url
 from django.views.generic import ListView, DetailView
 
 from betterYouApp.models import Challenge
-from betterYouApp.views import ChallengeListView
+from betterYouApp.views import ChallengeListView, VoteListView
 from betterYouApp import views
 
 urlpatterns = patterns('',
@@ -15,7 +15,10 @@ urlpatterns = patterns('',
 		paginate_by=5,
 		model=Challenge,
 		)),
-	url(r'^vote-challenges/$', views.vote, name='vote'),
+	url(r'^vote-challenges/(?P<page>\d+)?/?$', VoteListView.as_view(
+		paginate_by=5,
+		model=Challenge,
+		)),	
 	url(r'^sign-up/$', views.user_signup, name='user_signup'),
 	url(r'^log-in/$', views.user_login, name='user_login'),
 	url(r'^restricted/$', views.restricted, name='restricted'),

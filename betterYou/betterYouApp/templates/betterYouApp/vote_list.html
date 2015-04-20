@@ -70,12 +70,12 @@
             <div clas="row">
                 <div class="col-md-6">
                     {% if page_obj.has_previous %}
-                      <a class="btn btn-lg btn-default" href="/projects/better-you/current-challenges/{{ page_obj.previous_page_number }}/" role="button"> « Previous Page</a>
+                      <a class="btn btn-lg btn-default" href="/projects/better-you/vote-challenges/{{ page_obj.previous_page_number }}/" role="button"> « Previous Page</a>
                     {% endif %}
                 </div>
                 <div class="col-md-6 text-right">
                     {% if page_obj.has_next %}
-                      <a class="btn btn-lg btn-default" href="/projects/better-you/current-challenges/{{ page_obj.next_page_number }}/" role="button">Next Page »</a>
+                      <a class="btn btn-lg btn-default" href="/projects/better-you/vote-challenges/{{ page_obj.next_page_number }}/" role="button">Next Page »</a>
                      {% endif %}       
 
                 </div>

@@ -50,10 +50,12 @@ def propose(request):
 	context_dict['accepted'] = accepted
 	return render(request, 'betterYouApp/propose.html', context_dict)
 
-@login_required
-def vote(request):
-	context_dict = {'nav_vote': 'active'}
-	return render(request, 'betterYouApp/vote.html', context_dict)
+#@login_required
+class VoteListView(ListView):
+	def get_context_data(self, **kwargs):
+		context_dict = super(VoteListView, self).get_context_data(**kwargs)
+		context_dict['nav_vote'] = 'active'
+		return context_dict
 
 def user_signup(request):
 	# Context dictionary used to pass variables. 
@@ -145,13 +147,9 @@ def user_logout(request):
 	logout(request)
 	return HttpResponseRedirect('/projects/better-you')
 	
-#@login_required
 class ChallengeListView(ListView):
+#	@login_required
 	def get_context_data(self, **kwargs):
 		context_dict = super(ChallengeListView, self).get_context_data(**kwargs)
 		context_dict['nav_currentChallenges'] = 'active'
 		return context_dict
-
-#def vote(request):
-#	context_dict = {'nav_vote': 'active'}
-#	return render(request, 'betterYou/vote.html', context_dict)
