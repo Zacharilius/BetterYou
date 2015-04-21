@@ -21,7 +21,7 @@
         <tbody>
             {% for challenge  in object_list %}
             <tr>
-                <td id = "vote_count" class="lead">{{ challenge.votes }}</td>
+                <td id = "vote_count" class="lead" data-vote="{{ challenge.id }}">{{ challenge.votes }}</td>
                 <td class="lead">{{ challenge.postTime }}</td>
                 <td class="lead">{{ challenge.title }}</td>
                 <td class="lead">{{ challenge.user }}</td>
