@@ -1,19 +1,61 @@
 {% extends "includes/betterYou_base.html" %}
 {% block content %}
-<div class="container">
+{% load staticfiles %}
 <div class="jumbotron">
-    <h1>{{ user.username }}</h2>
-    <img src="{{ user.username.picture }}">
-    <h4>"{{ user.picture.path }}"</h4>
-    <h1>Welcome to Better-You</h1>
-    <h2>How it works</h2>
-    <p>Users propose tasks for the community to complete. The community then votes on the tasks proposed by other users. The top voted tasks are selected for this week's Better-You challenges. You then earn points based on the number of challenges you compete.</p>
-    <h2>How to join</h2>
-	<p>If you're new to Better-You click Signup. If you have an account, click Log in.</p>
-	<p>
-	   <a href="join" class="btn btn-lg btn-default">Join</a>
-	   <a href="Sign-In" class="btn btn-lg btn-default">Sign in</a>
-    </p>
+<div class="container">
+    <h1>Welcome {{ userProfile.user }}</h2>
+    
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <img src= "" alt="Profile picture" style="width: 30%">
+        </div>
+        <div class="col-md-6">
+                <h2>Points: {{ userProfile.points }}</h2>
+                <a class="btn btn-lg btn-default" href="/projects/better-you/ranking" role="button">See how your points compare</a>
+        </div>
+    </div> 
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+                <h2>My Recent Challenge Proposals</h2>
+                <table style="text-align: center" class="table">
+                    <thead>
+                    <tr>
+                        <th class="cover-heading">Post Time</th>
+                        <th class="cover-heading">Title</th>
+                    </tr
+                    </thead>
+                    <tbody>
+                        {% for challenge  in my_created_challenges %}
+                        <tr>
+                            <td class="lead">{{ challenge.postTime }}</td>
+                            <td class="lead">{{ challenge.title }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+        <div class="col-md-6">
+                <h2>My Recent Completed Challenges</h2>
+                 <table class="table">
+                    <thead>
+                    <tr>
+                        <th style="text-align: center" class="cover-heading">Post Time</th>
+                        <th style="text-align: center" class="cover-heading">Title</th>
+                    </tr
+                    </thead>
+                    <tbody>
+                        {% for challenge  in my_completed_challenges %}
+                        <tr>
+                            <td class="lead">{{ challenge.postTime }}</td>
+                            <td class="lead">{{ challenge.title }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>           
+        </div>
+    </div> 
 </div>
 </div>
 {% endblock %}

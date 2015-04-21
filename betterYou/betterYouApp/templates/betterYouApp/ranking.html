@@ -1,18 +1,24 @@
 {% extends "includes/betterYou_base.html" %}
 {% block content %}
-<div class="container">
 <div class="jumbotron">
-    <div class="inner cover">
-        <h1 class="cover-heading">Welcome to Better-You</h1>
-        <h2 class="cover-heading">How it works</h2>
-        <p class="lead">Users propose tasks for the community to complete. The community then votes on the tasks proposed by other users. The top voted tasks are selected for this week's Better-You challenges. You then earn points based on the number of challenges you compete.</p>
-		<h2 class="cover-heading">How to join</h2>
-		<p class="lead">If you're new to Better-You click Signup. If you have an account, click Log in.</p>
-		<p class="lead">
-	    	<a href="join" class="btn btn-lg btn-default">Join</a>
-	    	<a href="Sign-In" class="btn btn-lg btn-default">Sign in</a>
-    	</p>
-    </div> 
+<div class="container">
+    <h1>See how you rank against other Better-You users</h1>
+    <table style="text-align: center" class="table">
+        <thead>
+        <tr>
+            <th class="cover-heading">Post Time</th>
+            <th class="cover-heading">Title</th>
+        </tr
+        </thead>
+        <tbody>
+            {% for user in user_rankings %}
+            <tr>
+                <td class="lead">{{ user.user }}</td>
+                <td class="lead">{{ user.points }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> 
 </div>
 </div>
 {% endblock %}

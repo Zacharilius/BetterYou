@@ -21,11 +21,32 @@ def about(request):
 @login_required
 def profile(request):
 	context_dict = {'nav_profile': 'active'}
+
+	# Fetches user profile that matches the username's id
+	# Then pass the object to the context dictionary
+	userProfile = UserProfile.objects.get(user=request.user)
+	context_dict["userProfile"] = userProfile
+	print userProfile
+	print request.user
+
+	# Fetches the most recent vote-challenges
+	vote_challenges = Challenge.objects.filter(user=userProfile)[:5]
+	context_dict["my_created_challenges"] = vote_challenges
+	print vote_challenges
+	
+	# Fetches the most recent current-challenges
+	current_challenges = Challenge.objects.filter(user=userProfile)[:5]
+	context_dict["my_completed_challenges"] = current_challenges
+	print current_challenges
+
 	return render(request, 'betterYouApp/profile.html', context_dict)
 
 @login_required
 def ranking(request):
 	context_dict = {'nav_ranking': 'active'}
+
+	user_rankings = UserProfile.objects.all().order_by('-points');
+	context_dict['user_rankings'] = user_rankings
 	return render(request, 'betterYouApp/ranking.html', context_dict)
 
 @login_required
