@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-    
-    {% load staticfiles %} <!-- Bootstrap core CSS -->
+    {% load staticfiles %}
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -16,71 +14,73 @@
 
     <link rel= "stylesheet" href= "{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href= "{% static 'bower_components/bootstrap/dist/css/navbar-static-top.css' %}">
-    <link rel="stylesheet" href= "{% static 'betterYou/cover.css' %}">
+    <!--<link rel="stylesheet" href= "{% static 'betterYou/css/cover.css' %}"> -->
 
     <style type="text/css"></style><!-- Static navbar -->
+
 </head>
+<body>
+  <nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" data-target="#navbar" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="/">Better-You</a>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar" style="height: 1px;">
+      <ul class="nav navbar-nav">
+      <!--Moved to right navbar -->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class= '{{ nav_home }}'>
+          <a href="/projects/better-you">Home</a>
+        </li>
+        <li class= '{{ nav_about }}'>
+          <a href="/projects/better-you/about">About</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class= '{{ nav_profile }}'>
+          <a href="/projects/better-you/profile">Profile</a>
+        </li>
+        <li class= '{{ nav_ranking }}'>
+          <a href="/projects/better-you/ranking">Rankings</a>
+        </li>
+        <li class= '{{ nav_propose }}'>
+          <a href="/projects/better-you/propose-challenge">Propose Challenges</a>
+        </li>
+        <li class= '{{ nav_vote }}'>
+          <a href="/projects/better-you/vote-challenges">Vote Challenges</a></li>                  
+        <li class= '{{ nav_currentChallenges }}'>
+          <a href="/projects/better-you/current-challenges">Current Challenges</a></li>
+        <li class= '{{ nav_logout }}'>
+          <a href="/projects/better-you/log-out">
+          <span class="glyphicon glyphicon-log-out"></span> Log Out</a></a>
+        </li>
+      {% else %}
+        <li class="{{ nav_signup }}"><a href="/projects/better-you/sign-up">
+                      <span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li class="{{ nav_login }}"><a href="/projects/better-you/log-in">
+                    <span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+      {% endif %}
+    </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+  </nav>
 
-  <body>
-
-    <div class="site-wrapper">
-
-      <div class="site-wrapper-inner">
-
-        <div class="cover-container">
-
-          <div class="masthead clearfix">
-            <div class="inner">
-              <h3 class="masthead-brand">Better-You</h3>
-              <nav>
-                <ul class="nav masthead-nav">
-                  <li class= '{{ nav_home }}'><a href="/projects/better-you">Home</a></li>
-                  <li class= '{{ nav_about }}'><a href="/projects/better-you/about">About</a></li>
-                  {% if user.is_authenticated %}
-                  <li class= '{{ nav_profile }}'><a href="/projects/better-you/profile">Profile</a></li>
-                  <li class= '{{ nav_ranking }}'><a href="/projects/better-you/ranking">Rankings</a></li>
-                  <li class= '{{ nav_propose }}'><a href="/projects/better-you/propose-challenge">Propose Challenges</a></li>
-                  <li class= '{{ nav_vote }}'><a href="/projects/better-you/vote-challenges">Vote Challenges</a></li>                  
-                  <li class= '{{ nav_currentChallenges }}'><a href="/projects/better-you/current-challenges">Current Challenges</a></li>
-                  <li class= '{{ nav_logout }}'>
-                    <a href="/projects/better-you/log-out">
-                      <span class="glyphicon glyphicon-log-out"></span> Log Out</a></a>
-                  </li>
-                  {% else %}
-                  <li class="{{ nav_signup }}"><a href="/projects/better-you/sign-up">
-                      <span class="glyphicon glyphicon-user"></span> Sign Up</a>
-                  </li>
-                  <li class="{{ nav_login }}"><a href="/projects/better-you/log-in">
-                    <span class="glyphicon glyphicon-log-in"></span> Log In</a>
-                  </li>
-                  {% endif %}
-                </ul>
-              </nav>
-            </div>
-          </div>
-    {% block header %}
-    
-    {% endblock %}
     {% block content %}
     
     {% endblock %}
-
-          <div class="mastfoot">
-            <div class="inner">
-              <p>©Zachary Bensley 2015</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>    
+<div class="container">
+<div class="jumbotron">
+    <footer>
+      <p>©Zachary Bensley 2015</p>
+    </footer>
+</div>
+</div>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script> 
     <script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'betterYou/js/betterYouAJAX.js' %}"></script>
 </body>
 </html>

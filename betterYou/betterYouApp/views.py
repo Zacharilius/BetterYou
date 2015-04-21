@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from django.views.generic.detail import SingleObjectMixin
+from django.utils.decorators import method_decorator
 
 from betterYouApp.forms import UserForm, UserProfileForm, CreateChallenge
 from betterYouApp.models import Challenge, UserProfile
@@ -50,8 +51,15 @@ def propose(request):
 	context_dict['accepted'] = accepted
 	return render(request, 'betterYouApp/propose.html', context_dict)
 
-#@login_required
 class VoteListView(ListView):
+	template_name="betterYouApp/vote_list.html"
+	def get_queryset(self):
+		#slug = self.kwargs['slug']
+		try:
+			challenges = Challenge.objects.all()
+			return challenges.order_by('-votes').filter()
+		except Challenge.DoesNotExist:
+			return Challenge.objects.none()
 	def get_context_data(self, **kwargs):
 		context_dict = super(VoteListView, self).get_context_data(**kwargs)
 		context_dict['nav_vote'] = 'active'
@@ -148,8 +156,24 @@ def user_logout(request):
 	return HttpResponseRedirect('/projects/better-you')
 	
 class ChallengeListView(ListView):
-#	@login_required
+	template_name="betterYouApp/challenge_list.html"
+
 	def get_context_data(self, **kwargs):
 		context_dict = super(ChallengeListView, self).get_context_data(**kwargs)
 		context_dict['nav_currentChallenges'] = 'active'
 		return context_dict
+
+@login_required
+def like_challenge(request):
+	challenge_id = None
+	if request.method == 'GET':
+		challenge_id = request.GET['challenge_id']
+	votes = 0
+	if challenge_id:
+		challenge = Challenge.objects.get(id=int(challenge_id))
+		print challenge
+		if challenge:
+			votes = challenge.votes + 1
+			challenge.votes = votes		
+			challenge.save()
+	return HttpResponse(votes)
