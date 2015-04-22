@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from django.views.generic.detail import SingleObjectMixin
 from django.utils.decorators import method_decorator
+from django.utils import timezone
+from datetime import datetime, timedelta
 
 from betterYouApp.forms import UserForm, UserProfileForm, CreateChallenge
 from betterYouApp.models import Challenge, UserProfile
@@ -75,12 +77,17 @@ def propose(request):
 class VoteListView(ListView):
 	template_name="betterYouApp/vote_list.html"
 	def get_queryset(self):
-		#slug = self.kwargs['slug']
+		# Gets the current time
+		endTime = timezone.now()
+		# Gets the time from a week ago
+		startTime = endTime - timedelta(days=7)
 		try:
 			challenges = Challenge.objects.all()
-			return challenges.order_by('-votes').filter()
+			# Only displays posts within last week
+			return challenges.order_by('-votes').filter(postTime__range=[startTime, endTime])
 		except Challenge.DoesNotExist:
 			return Challenge.objects.none()
+
 	def get_context_data(self, **kwargs):
 		context_dict = super(VoteListView, self).get_context_data(**kwargs)
 		context_dict['nav_vote'] = 'active'
@@ -178,6 +185,18 @@ def user_logout(request):
 	
 class ChallengeListView(ListView):
 	template_name="betterYouApp/challenge_list.html"
+
+	def get_queryset(self):
+		# Gets the current time
+		endTime = timezone.now()
+		# Gets the time from a week ago
+		startTime = endTime - timedelta(days=7)
+		try:
+			challenges = Challenge.objects.all()
+			# Only displays posts within last week
+			return challenges.order_by('postTime').filter(postTime__range=[startTime, endTime]).filter(votes__gt=9)
+		except Challenge.DoesNotExist:
+			return Challenge.objects.none()
 
 	def get_context_data(self, **kwargs):
 		context_dict = super(ChallengeListView, self).get_context_data(**kwargs)
