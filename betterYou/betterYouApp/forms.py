@@ -16,7 +16,7 @@ class UserProfileForm(forms.ModelForm):
 
 class CreateChallenge(forms.ModelForm):
 	title = forms.CharField(max_length=128, help_text="Read a book")
-	numberChallenges = forms.IntegerField(max_value = 10, min_value=1, help_text = "Number of times challenge must be completed during the week")
+	numberChallenges = forms.IntegerField(max_value = 30, min_value=1, help_text = "Number of times challenge must be completed during the week")
 	#Add hidden user input
 	#Fix slugify in model
 
