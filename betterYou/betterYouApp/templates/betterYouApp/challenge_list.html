@@ -8,65 +8,33 @@
     <h3>
         The weekly Better-You challenges are created by users. You can select Propose Challenges to propose a challenge or select Vote Challenges to vote on already existing challenges. 
     </h3>
+
     <table class="table">
-    <thead>
+        <thead>
         <tr>
             <th style="text-align: center" class="cover-heading">Post Time</th>
             <th style="text-align: center" class="cover-heading">Votes</th>
             <th style="text-align: center" class="cover-heading">Title</th>
             <th style="text-align: center" class="cover-heading">Username</th>
-            <th style="text-align: center" class="cover-heading">Quantity</th>
+            <th style="text-align: center" class="cover-heading">Total Challenge</th>
+            <th style="text-align: center" class="cover-heading">You've Completed</th>
+            <th style="text-align: center" class="cover-heading">Complete</th>
         </tr
-    </thead>
+        </thead>
         <tbody>
             {% for challenge  in object_list %}
-                <tr>
-                    <td class="lead">{{ challenge.postTime }}</td>
-                    <td class="lead">{{ challenge.votes }}</td>
-                    <td class="lead">{{ challenge.title }}</td>
-                    <td class="lead">{{ challenge.user }}</td>
-                    <td class="lead">
-                    <select class="form-control">                    
-                    {% if challenge.numberChallenges == 1 %}
-                            <option>1</option>
-                    {% elif challenge.numberChallenges == 2 %}
-                            <option>1</option>
-                            <option>2</option>
-                    {% elif challenge.numberChallenges == 3 %}
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>                           
-                    {% elif challenge.numberChallenges == 4 %}
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>                          
-                    {% elif challenge.numberChallenges == 5 %}
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                    {% elif challenge.numberChallenges == 6 %}
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>                          
-                    {% elif challenge.numberChallenges == 7 %}
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>                          
-                            <option>7</option>                 
-                    {% endif %}
-                        </select>
-                    </td>
-                </tr>
-                {% endfor %}
+            <tr>
+                <td class="lead">{{ challenge.postTime }}</td>
+                <td id = "vote_count" class="lead" data-vote="{{ challenge.id }}">{{ challenge.votes }}</td>
+                <td class="lead">{{ challenge.title }}</td>
+                <td class="lead">{{ challenge.user }}</td>
+                <td class="lead">
+                <button id="likes" data-challengeid="{{challenge.id}}" type="button" class="btn-xs btn-default">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button>
+                </td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
     <div class="container-fluid">

@@ -39,3 +39,17 @@ class Challenge(models.Model):
 
 	class Meta:
 		ordering = ['-postTime']
+
+class LikeChallenge(models.Model):
+	challenge = models.ForeignKey(Challenge)
+	user = models.ManyToManyField(UserProfile, blank=True)
+
+	def __unicode__(self):
+		return self.challenge.title
+
+class CompleteChallenges(models.Model):
+	challenge = models.ForeignKey(Challenge)
+	user = models.ManyToManyField(UserProfile, blank=True)
+
+	def __unicode__(self):
+		return self.challenge.title

@@ -3,16 +3,22 @@
 <div class="jumbotron">
 <div class="container">
     <h1>See how you rank against other Better-You users</h1>
-    <table style="text-align: center" class="table">
+    <h2>Better-You points can be earned in several ways.</h2>
+    <p>First, users can vote on your <a href = "/projects/better-you/propose-challenges">Challenge Proposals</a></p>
+    <p>Second, you can complete <a href = "/projects/better-you/current-challenges">Current Challenges</a>
+    <p>Third, You get poitns when other users complete challenges accepted into <a href = "/projects/better-you/current-challenges">Current Challenges</a>
+    <table class="table">
         <thead>
         <tr>
-            <th class="cover-heading">Post Time</th>
-            <th class="cover-heading">Title</th>
+            <th class="cover-heading">Rank</th>
+            <th class="cover-heading">Username</th>
+            <th class="cover-heading">Points</th>
         </tr
         </thead>
         <tbody>
             {% for user in user_rankings %}
             <tr>
+                <td class="lead">{{ forloop.counter }}</td>
                 <td class="lead">{{ user.user }}</td>
                 <td class="lead">{{ user.points }}</td>
             </tr>
