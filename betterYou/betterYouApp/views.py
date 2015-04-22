@@ -192,9 +192,17 @@ def like_challenge(request):
 	votes = 0
 	if challenge_id:
 		challenge = Challenge.objects.get(id=int(challenge_id))
-		print challenge
+		print "challenge.user"
+		print type(challenge.user)
+		print "request.user"
+		print type(request.user)
 		if challenge:
-			votes = challenge.votes + 1
-			challenge.votes = votes		
-			challenge.save()
+			userRequest = UserProfile.objects.get(user=request.user)
+			votes = challenge.votes
+			if challenge.user == userRequest:
+				pass
+			else:
+				votes = votes + 1
+				challenge.votes = votes		
+				challenge.save()
 	return HttpResponse(votes)
