@@ -225,3 +225,26 @@ def like_challenge(request):
 				challenge.votes = votes		
 				challenge.save()
 	return HttpResponse(votes)
+
+@login_required
+def point_add(request):
+	challenge_id = None
+	if request.method == 'GET':
+		challenge_id = request.GET['challenge_id']
+	votes = 0
+	if challenge_id:
+		challenge = Challenge.objects.get(id=int(challenge_id))
+		print "challenge.user"
+		print type(challenge.user)
+		print "request.user"
+		print type(request.user)
+		if challenge:
+			userRequest = UserProfile.objects.get(user=request.user)
+			votes = challenge.votes
+			if challenge.user == userRequest:
+				pass
+			else:
+				votes = votes + 1
+				challenge.votes = votes		
+				challenge.save()
+	return HttpResponse(votes)

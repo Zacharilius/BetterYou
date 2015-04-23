@@ -11,7 +11,7 @@ class UserProfile(models.Model):
 	points = models.IntegerField(default=0)
 
 	# Add to the user profile
-	picture = models.ImageField(upload_to="media/profile_images/", blank=True)
+	picture = models.ImageField(upload_to="profile_images/", blank=False)
 
 	def __unicode__(self):
 		return self.user.username

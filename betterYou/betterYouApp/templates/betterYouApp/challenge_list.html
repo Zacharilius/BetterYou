@@ -3,7 +3,7 @@
 <div class="jumbotron">
 <div class="container">
     <h1>Complete challenges from the Better-You community</h1>
-    <h2>The top voted proposals become Better-You challenges. Click the check to complete a challenge. You earn points for each time you complete a challenge anbd click the check box. You also earn points if complete up to the Challenge Limit #</h2>
+    <h2>The top voted proposals become Better-You challenges. Click the check to complete a challenge. You earn points for each time you complete a challenge anbd click the check box. You also earn points if complete up to the Challenge Limit #.</h2>
     <table class="table">
         <thead>
         <tr>
@@ -20,13 +20,13 @@
             {% for challenge  in object_list %}
             <tr>
                 <td class="lead">{{ challenge.postTime }}</td>
-                <td id = "vote_count" class="lead" data-vote="{{ challenge.id }}">{{ challenge.votes }}</td>
+                <td class="lead">{{ challenge.votes }}</td>
                 <td class="lead">{{ challenge.title }}</td>
                 <td class="lead">{{ challenge.user }}</td>
                 <td class="lead">{{ challenge.numberChallenges }}</td>
-                <td class="lead">{{ challenge.numberChallenges }}</td>
+                <td id = "vote_count" class="lead" data-vote="{{ challenge.id }}">{{ challenge.numberChallenges }}</td>
                 <td class="lead">
-                <button id="likes" data-challengeid="{{challenge.id}}" type="button" class="btn-xs btn-default">
+                <button id="points" data-challengeid2="{{challenge.id}}" type="button" class="btn-xs btn-default">
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>
                 </td>

@@ -25,4 +25,6 @@ urlpatterns = patterns('',
 	url(r'^restricted/$', views.restricted, name='restricted'),
 	url(r'^log-out/$', views.user_logout, name='logout'),
 	url(r'^like-challenge/$', views.like_challenge, name='like_challenge'),
+	url(r'^point-add/$', views.point_add, name='point_add'),	
 )
+
