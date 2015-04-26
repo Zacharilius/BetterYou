@@ -11,7 +11,7 @@ class UserProfile(models.Model):
 	points = models.IntegerField(default=0)
 
 	# Add to the user profile
-	picture = models.ImageField(upload_to="profile_images/", blank=False)
+	picture = models.ImageField(upload_to="profile_images/", blank=True)
 
 	def __unicode__(self):
 		return self.user.username
@@ -40,16 +40,19 @@ class Challenge(models.Model):
 	class Meta:
 		ordering = ['-postTime']
 
-class LikeChallenge(models.Model):
-	challenge = models.ForeignKey(Challenge)
-	user = models.ManyToManyField(UserProfile, blank=True)
+class LikedChallenge(models.Model):
+	likedChallenge = models.ForeignKey(Challenge)
+	likedUser = models.ForeignKey(UserProfile)
+	likedTime = models.DateTimeField(default=timezone.now(), blank=True)
+
 
 	def __unicode__(self):
-		return self.challenge.title
+		return self.likedChallenge.title
 
-class CompleteChallenges(models.Model):
-	challenge = models.ForeignKey(Challenge)
-	user = models.ManyToManyField(UserProfile, blank=True)
+class CompletedChallenge(models.Model):
+	completedChallenge = models.ForeignKey(Challenge)
+	completedUser = models.ForeignKey(UserProfile)
+	completedTime = models.DateTimeField(default=timezone.now(), blank=True)
 
 	def __unicode__(self):
-		return self.challenge.title
+		return self.completedChallenge.title

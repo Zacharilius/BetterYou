@@ -9,7 +9,7 @@ from django.utils import timezone
 from datetime import datetime, timedelta
 
 from betterYouApp.forms import UserForm, UserProfileForm, CreateChallenge
-from betterYouApp.models import Challenge, UserProfile
+from betterYouApp.models import Challenge, UserProfile, LikedChallenge, CompletedChallenge
 
 # Create your views here.
 def index(request):
@@ -217,13 +217,21 @@ def like_challenge(request):
 		print type(request.user)
 		if challenge:
 			userRequest = UserProfile.objects.get(user=request.user)
-			votes = challenge.votes
+			votes = len(LikedChallenge.objects.filter(likedChallenge=challenge))
+			print "Challenge recognized"
 			if challenge.user == userRequest:
-				pass
+				print "Challenge = user's requesting their own challenge"
 			else:
-				votes = votes + 1
-				challenge.votes = votes		
-				challenge.save()
+				print "Challenge user is different from request user"
+				if LikedChallenge.objects.filter(likedUser = userRequest).filter(likedChallenge=challenge).exists():
+					print "User has already voted for this challenge"
+
+				else:
+					print "Added new challenge"
+					newLikedChallenge = LikedChallenge(likedUser = userRequest, likedChallenge = challenge)
+					newLikedChallenge.save()
+					votes = len(LikedChallenge.objects.filter(likedChallenge=challenge))
+
 	return HttpResponse(votes)
 
 @login_required
