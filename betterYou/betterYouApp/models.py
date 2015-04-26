@@ -21,7 +21,7 @@ class Challenge(models.Model):
 	title = models.CharField(max_length=128)
 	numberChallenges = models.IntegerField(default=1)
 	postTime = models.DateTimeField(default=timezone.now(), blank=True)
-	votes = models.IntegerField(default=1)
+	votes = models.IntegerField(default=0)
 	slug = models.SlugField(max_length=50)
 
 	def get_absolute_url(self):

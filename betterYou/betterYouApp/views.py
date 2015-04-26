@@ -221,14 +221,18 @@ def like_challenge(request):
 		print "request.user"
 		print type(request.user)
 		if challenge:
+			print "Inside challenge if"
 			userRequest = UserProfile.objects.get(user=request.user)
+			print "userRequest"
 			votes = len(LikedChallenge.objects.filter(likedChallenge=challenge))
 			print "Challenge recognized"
-			print "votes: " + votes
+			print "votes: " + str(votes)
 			if challenge.user == userRequest:
 				print "Challenge = user's requesting their own challenge"
 			else:
 				print "Challenge user is different from request user"
+				lC_List = LikedChallenge.objects.filter(likedUser = userRequest).filter(likedChallenge=challenge)
+				print lC_List
 				if LikedChallenge.objects.filter(likedUser = userRequest).filter(likedChallenge=challenge).exists():
 					print "User has already voted for this challenge"
 
@@ -245,13 +249,14 @@ def like_challenge(request):
 					challengeUser = challenge.user
 					points = challengeUser.points 
 					challengeUser.points = points + 1
-					challengeuser.save()
+					challengeUser.save()
 
 					newLikedChallenge = LikedChallenge(likedUser = userRequest, likedChallenge = challenge)
 					newLikedChallenge.save()
 					votes = len(LikedChallenge.objects.filter(likedChallenge=challenge))
 					print "Completed adding challenge"
 
+	print "votes: " + str(votes)
 	return HttpResponse(votes)
 
 @login_required
