@@ -36,8 +36,9 @@ def profile(request):
 	context_dict["my_created_challenges"] = vote_challenges
 	print vote_challenges
 	
-	# Fetches the most recent current-challenges
-	current_challenges = Challenge.objects.filter(user=userProfile)[:5]
+	# Fetches the most recent completed challenges from current-challenges
+	current_challenges = CompletedChallenge.objects.filter(completedUser=userProfile)[:5]
+	print current_challenges
 	context_dict["my_completed_challenges"] = current_challenges
 	print current_challenges
 
@@ -57,11 +58,15 @@ def propose(request):
 	accepted = False
  	context_dict = {'nav_propose': 'active'}
 
+ 	print "Proposed"
+
 	# If HTTP POST
 	if request.method == 'POST':
+		print "form post"
 		form = CreateChallenge(request.POST)
 
 		if form.is_valid():
+			print "form valid"
 			addedForm = form.save(commit=False)
 			addedForm.user = UserProfile.objects.get(user=request.user)
 			addedForm.save()
@@ -219,6 +224,7 @@ def like_challenge(request):
 			userRequest = UserProfile.objects.get(user=request.user)
 			votes = len(LikedChallenge.objects.filter(likedChallenge=challenge))
 			print "Challenge recognized"
+			print "votes: " + votes
 			if challenge.user == userRequest:
 				print "Challenge = user's requesting their own challenge"
 			else:
@@ -228,9 +234,23 @@ def like_challenge(request):
 
 				else:
 					print "Added new challenge"
+
+					# Gets current vote count and then add 1
+					c_vote = challenge.votes 
+					c_vote = c_vote + 1
+					challenge.votes = c_vote
+					challenge.save()
+
+					# Get current point count and then add 1
+					challengeUser = challenge.user
+					points = challengeUser.points 
+					challengeUser.points = points + 1
+					challengeuser.save()
+
 					newLikedChallenge = LikedChallenge(likedUser = userRequest, likedChallenge = challenge)
 					newLikedChallenge.save()
 					votes = len(LikedChallenge.objects.filter(likedChallenge=challenge))
+					print "Completed adding challenge"
 
 	return HttpResponse(votes)
 
@@ -239,7 +259,7 @@ def point_add(request):
 	challenge_id = None
 	if request.method == 'GET':
 		challenge_id = request.GET['challenge_id']
-	votes = 0
+	points = 0
 	if challenge_id:
 		challenge = Challenge.objects.get(id=int(challenge_id))
 		print "challenge.user"
@@ -247,12 +267,18 @@ def point_add(request):
 		print "request.user"
 		print type(request.user)
 		if challenge:
+			print "challenge exists"
 			userRequest = UserProfile.objects.get(user=request.user)
-			votes = challenge.votes
-			if challenge.user == userRequest:
-				pass
-			else:
-				votes = votes + 1
-				challenge.votes = votes		
-				challenge.save()
-	return HttpResponse(votes)
+
+			points = userRequest.points 
+			print points
+			points = points + 1
+			print points
+			userRequest.points = points
+			userRequest.save()
+
+			newCompletedChallenge = CompletedChallenge(completedChallenge = challenge, completedUser = userRequest)
+			newCompletedChallenge.save()
+			print "Completed adding challenge"
+
+	return HttpResponse(points)

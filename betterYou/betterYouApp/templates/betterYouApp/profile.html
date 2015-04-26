@@ -45,15 +45,15 @@
                  <table class="table">
                     <thead>
                     <tr>
-                        <th style="text-align: center" class="cover-heading">Post Time</th>
+                        <th style="text-align: center" class="cover-heading">Completed Time</th>
                         <th style="text-align: center" class="cover-heading">Title</th>
                     </tr
                     </thead>
                     <tbody>
                         {% for challenge  in my_completed_challenges %}
                         <tr>
-                            <td class="lead">{{ challenge.postTime }}</td>
-                            <td class="lead">{{ challenge.title }}</td>
+                            <td class="lead">{{ challenge.completedTime }}</td>
+                            <td class="lead">{{ challenge.completedChallenge.title }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

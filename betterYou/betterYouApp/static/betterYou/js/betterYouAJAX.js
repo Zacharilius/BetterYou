@@ -15,5 +15,4 @@ $(document).delegate('#points', 'click', function() {
 		console.log(data);
 		$("[data-vote=" + challid + "]").html(data)
 	});
-	$(this).hide();
 });
